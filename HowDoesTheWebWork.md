@@ -1,4 +1,4 @@
-web page
+ - web page
 A document which can be displayed in a web browser such as Firefox, Google Chrome, Opera, Microsoft Edge, or Apple Safari. These are also often called just "pages."
 
 website
