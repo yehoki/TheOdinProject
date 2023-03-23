@@ -1,5 +1,5 @@
 **Web page**
- A document which can be displayed in a web browser such as Firefox, Google Chrome, Opera, Microsoft Edge, or Apple Safari. These are also often called just "pages."
+A document which can be displayed in a web browser such as Firefox, Google Chrome, Opera, Microsoft Edge, or Apple Safari. These are also often called just "pages."
 
 **Website**
  A collection of web pages which are grouped together and usually connected together in various ways. Often called a "web site" or a "site."
