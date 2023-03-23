@@ -54,3 +54,24 @@ read the manual of a command: use space to scroll through quickly and `q` to qui
 displays more information on how to use the command
 
 
+### mkdir
+
+Make a new directory
+
+### nano
+
+Text editor
+
+### touch
+
+Generates a new empty file
+
+### rm
+
+Remove
+`-i` option to delete safely - asking for confirmation
+`-r` option used to remove a directory
+
+### mv
+
+move
