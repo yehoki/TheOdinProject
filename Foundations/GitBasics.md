@@ -4,6 +4,17 @@ Here we will include some basic Git commands and examples to be used throughout
 
 All git related commands will begin with `git ...`
 
+## Best Practices
+
+### Atomic commits
+
+What is an Atomic Commit? It's a commit that includes changes related to only one feature or task of the program.
+
+There are two main reasons for this:
+
+1. If something with the change turns out to cause more problems than expected, this is easily reversed without losing other changes;
+1. Enables us to write better commit messages
+
 ### clone
 
 `git clone [ssh key]` Use this to clone a repository locally
