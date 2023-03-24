@@ -75,3 +75,69 @@ Remove
 ### mv
 
 move
+`mv source destination`
+`mv test.txt words.txt` changes the filename
+`mv -i` stands for interactive and asks for confirmation when overwriting files
+
+### cp
+
+copies a file or a directory
+
+`cp -r directory directory_backup ` stands for recursive, in order to copy a directory
+
+### Wildcards
+
+* is a wildcard which represents zero or more characters.
+`*.txt` would show all text files
+
+? is a wildcard which represents exactly one character
+`?lane.txt` would show all text files which match this, e.g. plane.txt, slane.txt, ilane.txt and so on.
+
+We can use multiple ?'s in order to create an exact number of characters:
+`??st.txt` represents test.txt, tost.txt, mast.txt and so on
+
+### wc
+
+Stands for word count, use on a text file (or other type of file) to count the number of words inside
+Output gives the number of lines, words and characters in the files respectively.
+Can run on multiple files inside as well
+`wc -l *.txt` would show only the number of lines, similarly `-m` and `-w` for characters and words.
+
+### cat
+
+Concatenate, joins together and prints the contents of files
+
+### sort
+
+Sorts things in the file, use the `-n` option to sort numbers instead of an alphanumerical effect
+
+### head
+
+Shows up the first n lines in a file
+
+### tail
+
+Shows the last n line in file
+
+### echo
+
+Used to print strings in the CLI
+
+### > and >>
+
+`>` overwrites the current version of the file
+
+`>>` appends the text into the current version of the file
+
+`echo test > test.txt` creates a test.txt file
+
+`echo test1 > test.txt` changes the text inside the document to test1
+
+`echo test2 >> test.txt` adds a new line inside the document as test2
+
+
+### pipe |
+
+The vertical bar is called a *pipe* -  it tells the shell that we want the output from the left to be used as an input on the right.
+
+
