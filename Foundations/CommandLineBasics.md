@@ -87,7 +87,7 @@ copies a file or a directory
 
 ### Wildcards
 
-* is a wildcard which represents zero or more characters.
+`*` is a wildcard which represents zero or more characters.
 `*.txt` would show all text files
 
 ? is a wildcard which represents exactly one character
@@ -141,3 +141,22 @@ Used to print strings in the CLI
 The vertical bar is called a *pipe* -  it tells the shell that we want the output from the left to be used as an input on the right.
 
 
+### cut
+
+cut is used to cut out sections of each line, it expects the lines to be separated by a delimiter.
+`-d` specifies delimiter (, for a comma as an example)
+`-f (number)` specifies the filed number to be extracted
+
+### uniq
+
+filters out repeated values in a column
+
+### for loop structure
+
+```
+for X in 1 2 3 4
+do
+  action1
+  action2
+done
+```
