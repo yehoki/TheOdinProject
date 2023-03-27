@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 3</title>
+</head>
+<body>
+    <h1>
+        Part 3 Foundations
+    </h1>
+    <script>
+        let add7 = number => number + 7;
+        console.log (add7(12312));
+
+        function multiply(a, b) {
+            return(a * b);
+        }
+        console.log(multiply(2,5));
+
+        function capitalize(stringItem) {
+            let lowercaseString = stringItem.toLowerCase();
+            let returnString = lowercaseString.replace(lowercaseString[0], lowercaseString[0].toUpperCase());
+            return returnString;
+        }
+        console.log(capitalize('QWEWQSsadfwqQWrQWEQ'));
+        
+        function lastLetter(stringItem) {
+            let stringLength = stringItem.length;
+            return stringItem[stringLength - 1];
+        }
+        console.log(lastLetter('qweqweqweqwe'));
+    </script>
+</body>
+</html>
