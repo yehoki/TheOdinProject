@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript tasks</title>
+</head>
+<body>
+    <p>
+        We can write Javascript using two different ways in HTML: either using the 'script' tag or by writing the javascript code in an external code and adding it as a 'src' attribute to a script tag
+    </p>
+    <script>
+        console.log('Testing');
+    </script>
+
+    <h2>
+        Variables
+    </h2>
+    <p>
+        A variable is a "named storage" for data, essentially we define a name to store some sort of information. Within Javascript we use the <strong>let</strong> keyword to define a variable.
+    </p>
+    <p>
+        We can define a variable first and then assign it data, or we can combine the two:
+
+        let variable;
+        variable = 'test';
+
+        or
+
+        let variable = 'test';
+    </p>
+    <script>
+        let variable;
+        variable = 'test 1';
+        alert(variable);
+
+        let variables = 'test 2';
+        alert(variables);
+    </script>
+
+    <p>
+        We can also define multiple variables in-line: let user = 'user', let john = 'John', let age = 25; however it is best practice to separate them on different lines.
+    </p>
+    <script>
+        let user = 'user'; let john = 'John'; let age = 25;
+        alert(user);
+        alert(john);
+        alert(age);
+    </script>
+    <h4>
+        Variable naming
+    </h4>
+    <p>
+        When naming variables in Javascript there is a naming convention for variables called <strong>camelCase</strong>, where instead of having an underscore for whitespaces, we separate them using Capital Letters.
+        Along this, the name must only contain letters, digits or the symbols '$' and '_', and the first character must not be a digit.
+        Some examples: newVariable, variable1234, _testVariable1234, wowThisVariableIsReallyLong.
+    </p>
+    <h3>
+        Constants
+    </h3>
+    <p>
+        Another way to define variables in JS (short for Javascript) is the keyword 'const', like so: const variable = 'variable'; However constants <strong>CANNOT</strong> have their values changes.
+    </p>
+    <h2>
+        Tasks
+    </h2>
+    <p>We will complete some tasks from the <a href="https://javascript.info/variables">JS info page</a></p>
+    <h3>Working with variables</h3>
+    <script>
+        let admin;
+        let name;
+        
+        name = 'John';
+
+        admin = name;
+
+        alert("Admin: " + admin);
+    </script>
+
+    <h3>
+        Giving the right name
+    </h3>
+    <script>
+        const ourPlanet = 'Earth';
+        let currentVisitor = 'Current Visitor';
+        alert("Our planet: " + ourPlanet + "Current user: " + currentVisitor);
+    </script>
+
+    <h3>
+        Uppercase const
+    </h3>
+    <p>
+        Birthday is constant so can be used with capitals, however age is changing - so we might have to change it in the future hence lowercase.
+    </p>
+    <h2>
+        Assignment
+    </h2>
+    <script>
+        console.log(23 + 97);
+
+        console.log(1 + 2 + 3 + 4 + 5 + 6);
+
+        console.log((4 + 6 + 9) / 77);
+
+        let a = 10;
+        console.log("a:"  + a);
+        console.log(9*a);
+        let b = 7 * a;
+        console.log(b);
+
+        const max = 57;
+        let actual = max - 13;
+        let percentage = actual / max;
+        console.log(percentage);
+    </script>
+</body>
+</html>
