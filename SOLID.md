@@ -30,3 +30,24 @@ Another way to give jobs to an object is through **Object Role Stereotypes** dis
 - **Controller**: Makes decisions and controls a complex task, e.g. decides the outcome of a tic-tac-toe game while it's still in progress
 - **Coordinator**: Does not make decisions, however delegates work to other objects, e.g. once the home page content is generated, pushes it onto a makeFullPage function which matches together different parts of the DOM
 - **Interfacer**: Transforms information or requests between unique parts of the system.
+
+## O - The Open/Closed Principle
+
+The Open/Closed principle states the following: *All code should be open for extension, but closed for modification*.
+
+Open for extension, simply means if we want to adapt the object due to a change in our application or system, this should be possible. Closed for modification *however*, means should we adapt the code it should **not** modify the source code. So, should we want to want to extend our object, this should be possible without having to modify any of the existing code.
+
+## L - The Liskov Substitution Principle
+*Any class which should be substitutable for its parent class without unexpected consequences*
+In other words, if we have a parent and a child class, all the functionality within the parent class should be working without issues in the child class.
+## I - The Interface Segregation Principle
+*Clients should not be forced to depend on method which they do not use*.
+
+## D - The Dependency Inversion Principle
+*High-level modules should not depend on low-level modules - both of which should depend on abstractions* &,
+
+*Abstractions should not depend on details - details should depend on abstractions*.
+
+Right, what does all this really mean?
+
+Essentially, separate anything that can undergo change to a separate object or module, that way you can change it without having to change the higher-level function or code.
