@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Form Validation</title>
+</head>
+<body>
+    <form id="test-form" novalidate>
+        <label for="user-email">Email</label>
+        <input type="email" name="user-email" id="user-email">
+        <label for="user-country">Country</label>
+        <input type="text" name="user-country" id="user-country">
+        <label for="user-zip">Zip code</label>
+        <input type="text" name="user-zip" id="user-zip">
+        <label for="user-pass">Password</label>
+        <input type="password" name="user-pass" id="user-pass" required minlength="8">
+        <label for="user-pass-conf">Confirm password</label>
+        <input type="password" name="user-pass-conf" id="user-pass-conf">
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
