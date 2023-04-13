@@ -33,4 +33,27 @@ fetch(URL, {
 });
 ```
 
+## Async & Await
 
+When writing asynchronous code, JavaScript has two extremely useful keywords which we can use to help us out: `async` and `await`.
+
+The `async` keyword tells the JS engine we are declaring an asynchronous function, when it is declared with `async`, it automatically returns a `promise`.
+When a value is returned from the `async` function, that is equivalent to successfully resolving a `promise` - similarly when we throw an `error` that means the `promise` was rejected.
+We refer to the `async` keyword as *Syntatical sugar* for promises.
+
+The `await` keyword, when used inside an `async` function, tells JS to only continue the function **ONLY** once the `await` line of code is complete.
+In other words, it tells JS to wait until the asynchronous action to finish before continuing the function - it is similar to the `.then` method on a promise, except when using `await` we instead assign the result to a variable, and so we can use the value elsewhere in the function.
+
+One important thing to note is that we can have `async` without `await` - **HOWEVER** we **CANNOT** have `await` without `async`, as it only works inside an `async` defined function.
+
+Within an asynchronous function, as we saw before with the `.catch()` method on promises, we can handle when the promise gets rejected and we get an error.
+Similarly, with `async` and `await`, we can use a `try`/`catch` block, which is very intuitive from the wording:
+```JS
+async function functionName() {
+    try {
+        // Code to attempt with an `await` variable
+    } catch (error) {
+        // Code when the promise while awaiting the response fails - returns an error object which tells us more about the error.
+    }
+}
+```
