@@ -154,3 +154,121 @@ Let's count this up:
 However, we can write this with regards to the number we input: 1 + 3.5 * num + 1.
 So, depending on the number we choose, this function will run for 2 + 3.5 * num, or simply 2 + 3.5n steps.
 
+Now we can take a look at asymptotic notations, they are used to describe the running time of an algorithm.
+As we just saw, an algorithm's runtime depends on the input, from now on which we will simply describe as `n`.
+The three most common notations are the following:
+- **The Big O Notation**: Represents the upper bound of an algorithm, meaning the worst-case scenario.
+- **The Omega (Ω) Notation**: Represents the lower bound of an algorithm, meaning the best-case scenario.
+- **The Theta (Θ) Notation**: Represents both upper and lower bounds of an algorithm, so anlyses the average case.
+
+Although here we have 3 perfectly solid ways of describing the running time, we will always want to look at the worst case scenario for our algorithm, and so we use *The Big O Notation*.
+
+#### Big O
+
+So, we just found out what the Big O notation represents, but how do we actually find out the running time?
+As mentioned, it all depends on the input and our algorithm itself.
+Below are all the possible notations in order from fastest to slowest:
+- O(1) - Constant Complexity
+- O(log N) - Logarithmic Complexity
+- O(N) - Linear Complexity
+- O(N log N) - N x log N Complexity *read as `N log N`*
+- O(N<sup>2</sup>) - Quadratic complexity
+- O(N<sup>3</sup>) - Cubic Complexity
+- O(2<sup>N</sup>) - Exponential Complexity
+- O(N!) - Factorial Complexity
+
+Let's go through some more detail and context for each one:
+
+##### O(1) - Constant Complexity
+
+Constant complexity is the fastest timing possible, and it literally means it was completed in a single step. Well, kind of. What the Big O notation does not consider, is that there is an invisible constant outside of the big O.
+See this in the following example:
+
+Consider an array:
+```JS
+const arr = [1, 2, 3, 4, 5, 6]
+```
+In this array, we have 6 numbers, and to retrieve any individual number we call its index: so `arr[2] = 3` as an example.
+This was completed in a single step, but not quite.
+For this particular setup, the computer needs to look up where the array is in memory, since arrays in memory are stored as a block in-order, it then jumps to the index from the first element.
+So, it's not exactly a single step. However, these steps are incidental, and are consistent no matter whether we complete this for an array of 5 elements or 100,000 elements, and so when we consider the steps of same or smaller magnitude (as we will see soon), we simply take them out as a constant.
+To put it more mathematically: `O(1) == O(10) == O(1 + 2 + 3 + 4) == O(100000)` - they all are of constant complexity.
+This is mainly due to the fact that as the data size changes, these steps are the same and so they are dropped. The Big O only tells us the steps **relative to the input**.
+
+##### O(log N) - Logarithmic Complexity
+
+If an algorithm is of O(log N) complexity, it simply means that everytime the dataset doubles in size, the number of steps increases by one - pretty good right?
+One of the most commonly known algorithms with logarithmic complexity is [Binary Search](https://en.wikipedia.org/wiki/Binary_search_algorithm).
+Let's see how it works for a sorted array (Note: Binary Search will not work on a non-sorted array)
+```JS
+const arr = [1,2,3,4,6,8,9,10]
+```
+Our goal is to find out whether or not the array contains the number 7.
+Firstly, we find the value at the middle of the array, and compare it to 7. Since the number in the middle is 6, we discard the left side of our array and are left with:
+```JS
+arr = [6,8,9,10]
+```
+We repeat this again, find the middle of the array, and compare the value to 7 - in this case 9 is greater than 7, so we discard the right side of the array.
+Repeat this, until we end up with a single item - if that item matches what we were looking for then great! However in our case, we see that 7 is not in our array.
+Notice how we are essentially halving the array and comparing values so many times, and this number of steps increases only once we go past a specific threshold AKA doubling the size of the array.
+
+##### O(N) - Linear Complexity
+
+This is potentially one of the simplest ones here - simply think of a single loop.
+As long as there are no nested loops, each iteration will have constant complexity (or O(1) complexity), and it will be completed N times.
+So if we do some complexity arithmetic, let's say each iteration has 4 steps inside it: `O(N * 4) == O(N) * O(4) == O(N) * O(1) == O(N)`.
+So everytime we loop over a whole array, we go through N steps where N is the size of the array, and each time we increase the size of the array by 1, we gain another step.
+
+##### O(N log N) - N log N Complexity
+
+This one is usually when we have two separate actions, a clear example of this would be merge sort.
+As we saw previously, in Merge sort we split the arrays into left/right halves, as in Binary Search - so that part is log(N), but the merge of each array has O(N) complexity.
+Combining the two, we get that Merge sort has O(N log N) complexity.
+
+##### O(N<sup>2</sup>) - Quadratic Complexity
+
+As we just saw with O(N log N), this will again combine two separate algorithms, but both of O(N) complexity.
+The simplest way to think about this, is if we iterate over a 2-Dimensional array, where we first have a loop going over each row, and inside each of these loops we get a separate loop going over each column - and hence value.
+
+##### O(N<sup>3</sup>) - Cubic Complexity
+
+Similarly as Quadratic Complexity, think of triple nested loops - should you ever need it.
+
+##### O(2<sup>N</sup>) - Exponential Complexity
+
+For every extra element in our data set, our number of steps doubles. Don't have to say how unefficient this will get, as for size of 10 we get 1024 steps.
+
+##### O(N!) - Factorial Complexity
+
+You thought Exponential was the worst? Nope, here comes Factorial complexity.
+The most common way we would see Factorial complexity is trying to find combinations/permutations of an array, a bit more mathematics is involved here.
+
+
+### Space Complexity
+
+The first way of measuring how well an algorithm is working was through time complexity, which refered to the number of steps relative to the input.
+Space complexity will measure how much memory will be used relative to the input. But what actually is it?
+
+Well, it we can consider it as **the total space used by an algorithm relative to the size of the input**.
+It considers the space used by our algorithm in the first place, by also *auxiliary space* - that is any extra space used during the algorithm.
+Some examples of these could be storing temporary variables throughout the algorithm, or if we are creating new objects.
+After execution, at least in JavaScript and many other languages, we don't have to worry about that memory being freed due to a Garbage Collector, however it's important to consider it during the algorithm execution.
+We will see that even though Space Complexity is not the most important when considering algorithms, it is still important in case we run into troubles, to know why things are happening by measuring it.
+
+As with time complexity, we measure space complexity using the **Big O Notaton**, and we indeed have the same complexities as before, here are some examples:
+
+#### O(1) - Constant Complexity
+
+Consider an example where we take two parameters as an input, and return their product (assuming they are both numbers).
+We only need to store the two variables in memory, and thus it will be constant - O(1).
+
+#### O(N) - Linear Complexity
+
+The majority of data structures that we will come across will have space complexity O(N), which makes sense really as we just need to store the N items inside the data structure, and if we increase our input we linearly need more space as well.
+
+#### Other complexities
+
+Now, if we look at the [Big-O Cheat Sheet](https://www.bigocheatsheet.com/), we immediately see that the majority of the data structures have O(N) space complexity, and for some sorting algorithms we also get O(1) complexity.
+So other than the two mentioned, it's not necessary to see examples for the remaining ones.
+
+## Data Structures
