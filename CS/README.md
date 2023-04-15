@@ -135,43 +135,47 @@ function isEven(num){
 ```
 
 For a simplicity, let's take `num = 6` for now, and go through what's happening here:
+
 1. First, we assign a new variable with a set `value` of 1 - that's one step
 2. Next, we begin a while loop, in which multiple things take place:
-    1. We compare `currentNumber` with our input - one step
-    2. Check if `currentNumber` is even - one step
-    3. Every second number (how even numbers work), we log it out in the console - let's say 0.5 steps for now
-    4. Increment `currentNumber` by one - one step.
+   1. We compare `currentNumber` with our input - one step
+   2. Check if `currentNumber` is even - one step
+   3. Every second number (how even numbers work), we log it out in the console - let's say 0.5 steps for now
+   4. Increment `currentNumber` by one - one step.
 3. We compare one final time, but see that indeed `currentNumber = 7` and `num = 6` which is one step, but we quit the function.
 
 Let's count this up:
+
 1. Single step: Sum is 1
 2. For each number 1, 2, 3, 4, 5, 6 we repeat this, so let's just count up what's inside the while loop and multiply it by 6:
-    3.5 steps each
-    Multiply by 6
-    Sum is 1 + 21
+   3.5 steps each
+   Multiply by 6
+   Sum is 1 + 21
 3. Finally, we add one last compare: Sum is 1 + 21 + 1
 
-However, we can write this with regards to the number we input: 1 + 3.5 * num + 1.
-So, depending on the number we choose, this function will run for 2 + 3.5 * num, or simply 2 + 3.5n steps.
+However, we can write this with regards to the number we input: 1 + 3.5 _ num + 1.
+So, depending on the number we choose, this function will run for 2 + 3.5 _ num, or simply 2 + 3.5n steps.
 
 Now we can take a look at asymptotic notations, they are used to describe the running time of an algorithm.
 As we just saw, an algorithm's runtime depends on the input, from now on which we will simply describe as `n`.
 The three most common notations are the following:
+
 - **The Big O Notation**: Represents the upper bound of an algorithm, meaning the worst-case scenario.
 - **The Omega (Ω) Notation**: Represents the lower bound of an algorithm, meaning the best-case scenario.
 - **The Theta (Θ) Notation**: Represents both upper and lower bounds of an algorithm, so anlyses the average case.
 
-Although here we have 3 perfectly solid ways of describing the running time, we will always want to look at the worst case scenario for our algorithm, and so we use *The Big O Notation*.
+Although here we have 3 perfectly solid ways of describing the running time, we will always want to look at the worst case scenario for our algorithm, and so we use _The Big O Notation_.
 
 #### Big O
 
 So, we just found out what the Big O notation represents, but how do we actually find out the running time?
 As mentioned, it all depends on the input and our algorithm itself.
 Below are all the possible notations in order from fastest to slowest:
+
 - O(1) - Constant Complexity
 - O(log N) - Logarithmic Complexity
 - O(N) - Linear Complexity
-- O(N log N) - N x log N Complexity *read as `N log N`*
+- O(N log N) - N x log N Complexity _read as `N log N`_
 - O(N<sup>2</sup>) - Quadratic complexity
 - O(N<sup>3</sup>) - Cubic Complexity
 - O(2<sup>N</sup>) - Exponential Complexity
@@ -185,9 +189,11 @@ Constant complexity is the fastest timing possible, and it literally means it wa
 See this in the following example:
 
 Consider an array:
+
 ```JS
 const arr = [1, 2, 3, 4, 5, 6]
 ```
+
 In this array, we have 6 numbers, and to retrieve any individual number we call its index: so `arr[2] = 3` as an example.
 This was completed in a single step, but not quite.
 For this particular setup, the computer needs to look up where the array is in memory, since arrays in memory are stored as a block in-order, it then jumps to the index from the first element.
@@ -200,14 +206,18 @@ This is mainly due to the fact that as the data size changes, these steps are th
 If an algorithm is of O(log N) complexity, it simply means that everytime the dataset doubles in size, the number of steps increases by one - pretty good right?
 One of the most commonly known algorithms with logarithmic complexity is [Binary Search](https://en.wikipedia.org/wiki/Binary_search_algorithm).
 Let's see how it works for a sorted array (Note: Binary Search will not work on a non-sorted array)
+
 ```JS
 const arr = [1,2,3,4,6,8,9,10]
 ```
+
 Our goal is to find out whether or not the array contains the number 7.
 Firstly, we find the value at the middle of the array, and compare it to 7. Since the number in the middle is 6, we discard the left side of our array and are left with:
+
 ```JS
 arr = [6,8,9,10]
 ```
+
 We repeat this again, find the middle of the array, and compare the value to 7 - in this case 9 is greater than 7, so we discard the right side of the array.
 Repeat this, until we end up with a single item - if that item matches what we were looking for then great! However in our case, we see that 7 is not in our array.
 Notice how we are essentially halving the array and comparing values so many times, and this number of steps increases only once we go past a specific threshold AKA doubling the size of the array.
@@ -243,14 +253,13 @@ For every extra element in our data set, our number of steps doubles. Don't have
 You thought Exponential was the worst? Nope, here comes Factorial complexity.
 The most common way we would see Factorial complexity is trying to find combinations/permutations of an array, a bit more mathematics is involved here.
 
-
 ### Space Complexity
 
 The first way of measuring how well an algorithm is working was through time complexity, which refered to the number of steps relative to the input.
 Space complexity will measure how much memory will be used relative to the input. But what actually is it?
 
 Well, it we can consider it as **the total space used by an algorithm relative to the size of the input**.
-It considers the space used by our algorithm in the first place, by also *auxiliary space* - that is any extra space used during the algorithm.
+It considers the space used by our algorithm in the first place, by also _auxiliary space_ - that is any extra space used during the algorithm.
 Some examples of these could be storing temporary variables throughout the algorithm, or if we are creating new objects.
 After execution, at least in JavaScript and many other languages, we don't have to worry about that memory being freed due to a Garbage Collector, however it's important to consider it during the algorithm execution.
 We will see that even though Space Complexity is not the most important when considering algorithms, it is still important in case we run into troubles, to know why things are happening by measuring it.
@@ -272,3 +281,88 @@ Now, if we look at the [Big-O Cheat Sheet](https://www.bigocheatsheet.com/), we 
 So other than the two mentioned, it's not necessary to see examples for the remaining ones.
 
 ## Data Structures
+
+As you might already guess, the sole purpose of _data structures_ is to _store_ data.
+There are many of them, and each one of them has its unique purpose with which we can use to meet our needs.
+Although storing 100,000 entries in an array seems like an _okay_ idea at first, it becomes significantly trickier searching for elements inside it over time.
+All the structures have trade-offs - but that's the challenge, picking the correct one based on the scenario given.
+
+As we saw being introduced to algorithms, we can see that specifically sorting algorithms are quite common, as we often want things in some order.
+We also want to search for things, so for example if you are googling something with a perfectly good internet connection, the difference of seconds and even milliseconds counts.
+One thing to note, some data structures are mutable whereas some aren't.
+**Mutability** means whether or not we can change the state of the object - in this case data type, after it has been created.
+For example, in JavaScript we get `const five = 5;` is immutable as no matter what we do, we cannot reassign the value of `five`, whereas `let six = 6;` is mutable so we can do something like `six = 'six';` if we want to change its state or value.
+
+Let's have a look at some of the most common data structures known.
+
+### Primitive types
+
+Simply put, primitive data types are a set of basic implemented data types from which all other data types are constructed.
+Some examples would be integers, booleans, floats, characters or memory address.
+However, notice here that characters are not strings - these are singular characters.
+
+### Composite types
+
+A composite data type, is any data type which can be constructed from the primitive data types, AKA the OG data types.
+Some examples here are arrays, structs (classes), tuples and finally strings.
+One of these stands out from the rest.
+Strings are actually not a primitive data type, they are constructed as a sequence of characters, very similarly to how arrays are constructed.
+This might explain why we can perform similar actions on strings as we can on arrays, such as referencing the i-th index of an array in some languages.
+
+For example, an array is a number of elements in a specific order, usually of all the same type, however not necessary, and usually represented by square brackets: [].
+We access data in an array through an integer valued index which specifies the position inside an array.
+When we access an array in memory, we reference it as a pointer which represents a memory address, and it stores all its values in a memory block, and referencing the different objects of the array is done by arithmetic operations.
+
+### Abstract types
+
+Defining Abstract Data types formally from its [Wikipedia](https://en.wikipedia.org/wiki/Abstract_data_type#) definition is the following:
+"A class of objects whose logical behaviour is defined by a set of values and a set of operations."
+Since the proper definition comes from a more mathematical background regarding sets and models and operations, this is the only definition that matters to us for now.
+
+Let's dive into some examples of abstract data types, refering to the Wikipedia definitions.
+
+#### Stack
+
+A stack is what it sounds like, as many things in the computer science world.
+It's a stack of object, one on top of another.
+Formally, it's a collection of elements with two main operations:
+
+- Push, which adds an element to the end of the collection, or stack
+- Pop, which removes the most recently added element.
+
+Elements in the stack are sorted by insertion order, i.e. the last item that was put in the stack will be the first one that is going to come out - Last In First Out (LIFO), and the elements have no index so we can't (and shouldn't anyway) access elements in the middle of the stack.
+They can be quite useful in context if we want to reverse the order of elements, a prime example here would be an undo button, it would store the activities in a stack and simply undoing it removes it from the stack as the most recent action.
+
+We can easily implement a stack with an array, where array[0] is the first element in the stack.
+
+#### Queue
+
+A queue is a collection of elements maintained in a sequence, and can be modified by adding new ones at the end of the queue, and removing them from the other end of the queue.
+By convention, the beginning of the queue is the _head_ or _front_ of the queue, and the ending, or the last element, is the _tail_ or _rear_ of the queue.
+It has two main operations:
+
+- Enqueue: adds an element to the rear of the queue
+- Dequeue: removes an element from the front of the queue.
+
+#### (Linked) List
+
+A (linked) list is a linear collection of data elements whose order is not given by their physical placement in memory, but each element points to the next.
+The last element in the list will point to a `null` value, however there are some implementation where that differs.
+
+Each element in a linked list is a node, and each node contains some data, and a reference which points to the next node.
+Think of it as a singular unhooked chain, each chain hoop is hooked onto another one representing the reference, apart from the first and the last ones.
+
+#### Hash-table
+
+A hash-table, also known as a hash-map, implements an associative array (array containing key, value pairs) or a dictionary.
+Within a hash-table, each of the keys is mapped to a value, and using a hash function it computes the index, or the hash code, into an array of buckets, or slots.
+When we lookup a value by its key in a hash-table, the hash function will hash our key entry, and indicates where the corresponding value is stored in the table.
+
+#### Tuple
+
+A tuple is a finite ordered list (or sequence) of elements.
+
+### Search Algorithms
+
+
+#### Binary Search
