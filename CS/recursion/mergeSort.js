@@ -8,8 +8,13 @@ function mergeSort(arr) {
   const middle = Math.floor(arr.length / 2);
   let left = mergeSort(arr.slice(0, middle));
   let right = mergeSort(arr.slice(middle, arr.length));
+  // Merge the two sides
+  return merge(left, right);
+}
 
-  // Merging left and right
+
+//   Merging left and right
+function merge(left, right) {
   let p1 = 0;
   let p2 = 0;
   let ans = [];
@@ -28,10 +33,9 @@ function mergeSort(arr) {
   for (; p2 < right.length; p2++) {
     ans.push(right[p2]);
   }
-
   return ans;
 }
 
 console.log(mergeSort([1, 10, 3, 15, 12, 6, 7, 8]));
-console.log(mergeSort([2,1]))
-console.log(mergeSort([1,10,5,6,4,123,4]))
+console.log(mergeSort([2, 1]));
+console.log(mergeSort([1, 10, 5, 6, 4, 123, 4]));
