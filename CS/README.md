@@ -362,7 +362,72 @@ When we lookup a value by its key in a hash-table, the hash function will hash o
 
 A tuple is a finite ordered list (or sequence) of elements.
 
+#### Tree
+
+A tree represents a hierarchial tree structure with a set of connected nodes, where the nodes store a value and **multiple** pointers to children nodes.
+Each node must be connected to **exactly one** parent node, except for the *root* node - the first node in a tree.
+
+A tree is very similar to a linked list, but instead each node can point to multiple other nodes.
+
+#### Binary tree
+
+A binary tree is one of the more popular types of trees, where it constrains the number of children nodes to at most two.
+We refer to each of the children as the *left node* and the *right node*.
+
+
+#### Binary search tree
+
+A [binary search tree](https://en.wikipedia.org/wiki/Binary_search_tree) is a binary tree where each of the internal nodes keys are less than the ones in the right subtree, but greater than those in the left subtree.
+Essentially, it separates the values in a way where it allows for the binary search algorithm.
+
+
 ### Search Algorithms
 
+A [Search Algorithm](https://en.wikipedia.org/wiki/Search_algorithm) is simply an algorithm designed to solve a search problem, their purpose is retrieve stored information within a data structure.
+A simple one we can think of is finding a `value` within an array:
+```
+for each element in array
+    if element == value
+        return true
+return false
+```
+
+As we saw in the [Big-O Cheat sheet](https://www.bigocheatsheet.com/), majority of data structures available to us have a search time and space complexity of O(N).
+The worst case scenario usually takes place if the element either doesn't exist, forcing the search algorithm to go through the entire data structure without success of finding the value.
+Another worst case scenario would be if the element is at the end of a data structure, for example in an array - we would have to go through every single element until we find that value.
+
+Let's take a look at some search algorithms:
 
 #### Binary Search
+
+We previously mentioned the binary search algorithm in the [Time Complexity section](#olog-n---logarithmic-complexity), when discussing logarithmic time complexity.
+As we have already seen, the binary search algorithm is a Divide and conquer algorithm, meaning it recursively calls itself on a sub-problem until it finds a problem it can solve straight up.
+Let's go into a bit more context of how it's done.
+
+The binary search algorithm finds the position of a target within a sorted array. The sorted part is necessary for the algorithm to work.
+But how does it actually work?
+
+Remember during a [Merge sort](#merge-sort), we split the array in half, look at the left side, split etc. and eventually merge? Well, binary search is somewhat similar.
+- We begin by finding the middle of the array, after which we compare if the value we are looking for is greater or less than the middle of the array (or if we are lucky, it's equal).
+It should be clear as to why the array **HAS** to be sorted, imagine if it's sorted incorrectly and in our right side there are values which are less than in the left side.
+- After we see whether our target value is compared to the middle, we only look at the half that *could* contain our value.
+- Repeat this again, until we are left with a single value - this is either equal to our value with success, or not with failure.
+
+As mentioned before, binary search has time complexity O(log N) as we are adding one extra step every time we double the array - we just need to half the array one more time in the worst case scenario.
+The space complexity is always O(1) no matter what, as we require three pointers to elements: one pointer to our target, one to the position within the data structure (index or pointer), one pointing to the current middle value.
+
+Here is the [pseudocode](https://www.youtube.com/watch?v=T98PIp4omUA&t=20s&ab_channel=CS50) for Binary search:
+```
+Repeat until the sub(array) is of size 0:
+    Calculate the middle point of the current sub(array)
+    If the target is at the middle, stop and return the position
+    Otherwise, if the target is less than what's at the middle, repeat, changing the end point to be just to the left of the middle
+    Otherwise, if the target is greater than what's at the middle, repeat, changing the end point to be just to the right of the middle
+Return null
+```
+
+#### Binary tree traversal
+
+##### Breadth-first search
+
+##### Depth-first search
