@@ -365,26 +365,25 @@ A tuple is a finite ordered list (or sequence) of elements.
 #### Tree
 
 A tree represents a hierarchial tree structure with a set of connected nodes, where the nodes store a value and **multiple** pointers to children nodes.
-Each node must be connected to **exactly one** parent node, except for the *root* node - the first node in a tree.
+Each node must be connected to **exactly one** parent node, except for the _root_ node - the first node in a tree.
 
 A tree is very similar to a linked list, but instead each node can point to multiple other nodes.
 
 #### Binary tree
 
 A binary tree is one of the more popular types of trees, where it constrains the number of children nodes to at most two.
-We refer to each of the children as the *left node* and the *right node*.
-
+We refer to each of the children as the _left node_ and the _right node_.
 
 #### Binary search tree
 
 A [binary search tree](https://en.wikipedia.org/wiki/Binary_search_tree) is a binary tree where each of the internal nodes keys are less than the ones in the right subtree, but greater than those in the left subtree.
 Essentially, it separates the values in a way where it allows for the binary search algorithm.
 
-
 ### Search Algorithms
 
 A [Search Algorithm](https://en.wikipedia.org/wiki/Search_algorithm) is simply an algorithm designed to solve a search problem, their purpose is retrieve stored information within a data structure.
 A simple one we can think of is finding a `value` within an array:
+
 ```
 for each element in array
     if element == value
@@ -408,15 +407,17 @@ The binary search algorithm finds the position of a target within a sorted array
 But how does it actually work?
 
 Remember during a [Merge sort](#merge-sort), we split the array in half, look at the left side, split etc. and eventually merge? Well, binary search is somewhat similar.
+
 - We begin by finding the middle of the array, after which we compare if the value we are looking for is greater or less than the middle of the array (or if we are lucky, it's equal).
-It should be clear as to why the array **HAS** to be sorted, imagine if it's sorted incorrectly and in our right side there are values which are less than in the left side.
-- After we see whether our target value is compared to the middle, we only look at the half that *could* contain our value.
+  It should be clear as to why the array **HAS** to be sorted, imagine if it's sorted incorrectly and in our right side there are values which are less than in the left side.
+- After we see whether our target value is compared to the middle, we only look at the half that _could_ contain our value.
 - Repeat this again, until we are left with a single value - this is either equal to our value with success, or not with failure.
 
 As mentioned before, binary search has time complexity O(log N) as we are adding one extra step every time we double the array - we just need to half the array one more time in the worst case scenario.
 The space complexity is always O(1) no matter what, as we require three pointers to elements: one pointer to our target, one to the position within the data structure (index or pointer), one pointing to the current middle value.
 
 Here is the [pseudocode](https://www.youtube.com/watch?v=T98PIp4omUA&t=20s&ab_channel=CS50) for Binary search:
+
 ```
 Repeat until the sub(array) is of size 0:
     Calculate the middle point of the current sub(array)
@@ -428,6 +429,118 @@ Return null
 
 #### Binary tree traversal
 
+When working with binary trees, due to its structure, it has a unique way of going through its elements - or in other words, traversing it.
+We formally define tree traversal as 'the process of visiting each node in the tree exactly once in some order', where 'visiting a node' refers to reading or processing data stored in that node.
+Since a binary tree is not linear, like an array for example, the way we go through this data structure is quite different.
+
+Due to how trees are designed and based on the order in which the nodes are visited, we can split tree traversal algorithms into two broad areas:
+
+- Breadth-first search: This is checking each node at the same depth, or level, where the root node is at level 0, going from left to right. We call this **level-order** traversal
+- Depth-first search: Here, we check the whole depth of a child node, or in other words, visit the entire subtree of the child node before moving onto another node. Once we visit all the _grand-children_ of a node, we move on the right node. We refer to the root node as (D), the left subtree as (L) and the right subtree as (R).
+  In this case, we have three popular ways of traversing via depth-first search:
+
+* Preorder traversal (D)(L)(R) - Start at the root node, visit all the left subtree and then the right subtree.
+* In-order traversal (L)(D)(R) - Start at the left subtree, then the root node and then the right subtree.
+* Postorder traversal (L)(R)(D) - Start at the left subtree, then visit all the nodes in the right subtree and then visit the root node.
+
 ##### Breadth-first search
 
+As we saw before, one example of breadth-first search is the _Level-order_ traversal, let's take a look at it.
+
+Consider the following tree:
+
+```
+            D
+        /       \
+        B       E
+    /     \
+    A     C
+```
+
+Breadth-first search means our order of search would go: D, B, E, A, C
+However, since we can only point to one node at a time, if we point to `B`, it we cannot find `E` - we can only find `E` from node `D`.
+So, we will use a data structure we learnt about recently - the _Queue_.
+
+So, starting from the root node, our idea will be to store the addresses, or the pointers, to the discovered nodes in the queue.
+As long as our tree is not empty, we can enqueue the discovered node, visit it and then enqueue its children - like so:
+
+```
+Level 1 queue: [Node D] | Visit Node D | Enqueue the children of Node D
+Level 2 queue: [Node B, Node E] | Visit Node B | Enqueue the children of Node B | Visit Node E | Enqueue the children of node E
+Level 3 queue: [Node A, Node C] | Visit Node A | Enqueue the children of Node A | Visit node C | Enqueue the children of node C
+```
+
+As we already know that queues are First-in-first-out data structures, that means that going from left to right will indeed work.
+
+But what is the time and space complexity?
+Well, the worst case scenario is if we have all our nodes in a single-file line, essentially a linked list - then the time complexity is O(N).
+Our space complexity is a bit different here, since we have our queue which will be storing our discovered nodes.
+Here, our best case scenario is when we have our tree as a linked list, as our queue will only contain a single node at a time - which would be O(1).
+However, the average and the worst case, it would be O(N/2) == O(N), but how?
+If we consider a _perfect_ binary tree, a tree where each node has **exactly** 2 children nodes, we will then have to store at least N/2 nodes in our queue, if we look at the deepest level of our binary tree.
+
 ##### Depth-first search
+
+As we already saw, there are three common ways of doing depth-first search: preorder traversal, inorder traversal and postorder traversal.
+Let's start with preorder:
+
+```
+Visit the root
+Visit the left subtree
+Visit the right subtree
+```
+
+Since our Node object will have three fields: left (stores the address of the left child), right (stores the address of the right child) and data (stores the value of the node).
+Let's put this into code:
+
+```JS
+class Node {
+    constructor(
+        data = null,
+        left = null,
+        right = null
+    ){
+        this.data = data
+        this.left = left
+        this.right = right
+    }
+}
+
+function preorderTraversal(rootNode){
+    if (rootNode == null){
+        return;
+    }
+    console.log(rootNode.data);
+    preorderTraversal(rootNode.left);
+    preorderTraversal(rootNode.right);
+}
+```
+
+Let's take a look at the call-stack of our previous example:
+
+```
+            D
+        /       \
+        B       E
+    /     \
+   A     C
+```
+
+With breadth-first search, we stored our Nodes inside a queue, whereas here we stored them inside another first-in-first-out data structure - **The Stack**, namely the **call-stack**.
+
+1. Begin at Node `D` which prints the `data` field for Node `D` and traverse down to the left - call the function for node `B`, which prints the `data` field for node `B`.
+2. Call the function for node `A`, which prints the `data` field for node `A`.
+3. Since both `left` and `right` fields of node `A` are null - go back up to Node `B`.
+4. Call the function for node `C`, which prints the `data` field for node `B`.
+5. Both `left` and `right` fields of Node `C` are null, so go back up to Node `B`.
+6. All instructions complete for Node `B`, so we are back up to Node `D` - from where we call the function for node `E`.
+7. This prints the `data` field of Node `E` and since both `left` and `right` fields are null, goes back up to Node `D`.
+8. The function run is complete, this should be the output: `D`, `B`, `A`, `C`, `E`.
+
+Doing this for both inorder and postorder is almost exact, however we switch where in the function we decide to print the `data` field of the Node.
+Inorder traversal, we put the print in-between the `left` and `right` Node function calls.
+Postorder traversal, we put the print after the `left` and `right` Node function calls.
+
+Since we go through the whole tree, the time complexity will be O(N), as we visit each Node in the tree once.
+Space complexity is a bit different here - the worst case scenario will be O(H), where H is the height of our tree, i.e. the number of levels it contains - which would be achieved if we fill up the call-stack with all the Nodes possible, when the tree becomes simply a linked list. In this case, the height of our tree is N - 1 and so it becomes O(N - 1).
+In the average/best case however, our height becomes log N, in the _perfect_ binary tree scenario, where our call stack simply has at most, one single subtree of the root node at a time and they're all equal sized.
