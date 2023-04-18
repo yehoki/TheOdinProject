@@ -167,7 +167,7 @@ class Tree {
       if (current.right !== null) {
         queue.push(current.right);
       }
-      // Shift removes the first element in an array;
+      // Shift removes the first element in an array, and returns it;
       queue.shift();
     }
     if (fn == undefined) {
