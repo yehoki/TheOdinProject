@@ -23,7 +23,7 @@ class Tree {
   }
 
   // merge sort the array
-  sortArr(arr) {
+  sortArray(arr) {
     arr = mergeSort(arr);
     return arr;
   }
@@ -54,7 +54,7 @@ class Tree {
 
   // checkArray makes sure that the array is sorted and does not contain duplicates
   checkArray(arr) {
-    arr = this.sortArr(arr);
+    arr = this.sortArray(arr);
     arr = this.removeDuplicates(arr);
     this.setArray(arr);
   }
@@ -159,8 +159,12 @@ class Tree {
       // console.log("queue2", queue);
       let current = queue[0];
       // push adds the element as the last element of an array;
-      orderArr.push(current.data);
-      console.log(current.data);
+      if (fn !== undefined){
+        console.log(fn(current.data));
+      } else {
+        console.log(current.data);
+        orderArr.push(current.data);
+      }
       if (current.left !== null) {
         queue.push(current.left);
       }
@@ -172,8 +176,6 @@ class Tree {
     }
     if (fn == undefined) {
       return orderArr;
-    } else {
-      orderArr.forEach((value) => fn(this.find(value, root)));
     }
   }
 
@@ -183,7 +185,11 @@ class Tree {
       return;
     }
     this.inorder(fn, root.left);
-    console.log(root.data);
+    if (fn !== undefined){
+      console.log(fn(root.data));
+    } else {
+      console.log(root.data);
+    }
     this.inorder(fn, root.right);
   }
 
@@ -192,7 +198,11 @@ class Tree {
     if (root == null) {
       return;
     }
-    console.log(root.data);
+    if (fn !== undefined){
+      console.log(fn(root.data));
+    } else {
+      console.log(root.data);
+    }
     this.preorder(fn, root.left);
     this.preorder(fn, root.right);
   }
@@ -203,7 +213,11 @@ class Tree {
     }
     this.postorder(fn, root.left);
     this.postorder(fn, root.right);
-    console.log(root.data);
+    if (fn !== undefined){
+      console.log(fn(root.data));
+    } else {
+      console.log(root.data);
+    }
   }
 
   // height function - returns the height of a node
@@ -312,6 +326,8 @@ console.log(newTree.isBalanced(newTree.root));
 // 3.
 console.log("Level Order:");
 newTree.levelOrder(undefined, newTree.root);
+console.log("Level order with multiply by 2:");
+newTree.levelOrder(function(x){return x*2}, newTree.root);
 console.log("Preorder:");
 newTree.preorder(undefined, newTree.root);
 console.log("Postorder");
