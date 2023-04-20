@@ -42,3 +42,33 @@ Well, each unit in our case would look at what happens with different inputs, an
 
 As we can see, this is a **VERY** exhaustive list of all possible cases, however it is often necessary in unit testing - especially the larger our project or application gets, it helps us eliminate tiny edge cases over time where it may break our entire application which often makes it so we struggle to find the issue.
 
+Let's say we have a class with a constructor and multiple methods assigned to it.
+When testing, whether it is unit testing or any form of testing, we want to make sure each method is being tested individually, as well as make sure they are not dependent on an external function.
+Imagine a situation where you have a method being dependent on another class' method to work, and you run tests and it fails - now we have a bit of a dillemma as to what is the *true* reason behind the test failing.
+Is it the function we are testing?
+Is it the external function?
+Or is it something completely different?
+
+## Tightly coupled code
+
+At the beginning of the journey with writing code, if we simply look back to some of our projects we will see how the code is very *compact*, everything tightly fits together and kind of relies on one another.
+We call this *tightly coupled code*, where we have code which relies on separate logic to produce outcomes - but we can split this logic instead.
+We know that writing clean code means making sure each function has a single responsibility behind it, of course that will become clear the more code we write but especially at the beginning it is important to ask oneself some questions:
+- Can I describe what it does in simple terms?
+- Does it make sense splitting it up?
+- What *could* go wrong here?
+
+When we write our code with *TDD*, we are more likely to create what are called *Pure Functions*, which have these properties:
+- A *Pure Function* will **always** return the same output if the same arguments are passed into the function - meaning that it does not depend on some external condition, function or data to handle the arguments given.
+- A *Pure Function* will not create any **observable** side effects - these could be network requests or data mutation for example.
+
+But what are these so called *side effects*?
+Well, think of anything to do with interactions that are outside that function:
+- Does it change some non-const variable's value?
+- Does it send out a network request?
+- Does it print to the console, or manipulate the DOM?
+Why are pure functions so *majestic* you might ask?
+Well, mainly from the point of view of testing or refactoring, if we have a clear purpose and we don't have to rely on anything externally, it will be really simple if we need to test and/or refactor our *pure* functions.
+
+With that being said, it's pretty obvious that not all functions need to be, or rather should be, pure.
+A good idea is if an impure function uses pure functions to do some work with arguments given and return a consistent input, and then an impure function can go from there and use it.
