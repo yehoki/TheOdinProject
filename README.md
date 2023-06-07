@@ -292,6 +292,24 @@ Don't test them. Don't make assertions about their results. Don't expect to send
 
 ##### A deeper look at Git
 
+- How can you amend your last commit?
+    * We can amend the latest commit using `git commit --amend`
+
+- What are some different ways to rewrite history?
+    * Firstly, we can simply amend the latest commit with `git commit --amend`. We can also change multiple commit messages using `rebase`. We can `squash` together multiple commits into one, or reorder them using `rebase` again. We can separate commits using `rebase`. Finally, we can simply delete a commit with the `drop` option while rebasing.
+
+- What is a safe way to push history changes to a remote repository?
+    * Whether you are working alone or with others, try to avoid using `git push --force-with-lease` to fail-safe as it will check the branch you are attempting to push to and see if there have been any new updates.
+
+- What are the dangers of history-changing operations?
+    * Short and sweet - destroying and deleting code. Whether your own or someone else's.
+
+- What are the best practices of history-changing operations?
+    * [Best practices](IntermediateGit.md#dangers-and-best-practices)
+
+- Explain what it means for branches to be pointers.
+    * Branches are pointers in the sense that they point to a single commit, and each commit can point to another one creating a chain.
+
 ##### Using Git in the real world
 
 #### React JS
