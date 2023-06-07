@@ -161,9 +161,13 @@ I will be treating the Q & A section as a way to *qucikly refresh* anything, by 
 
 #### Asynchronous JavaScript and APIs
 
-##### JSON 
-
 ##### Asynchronous Code
+
+- What is a callback?
+    * A callback function is a function passed into another function as an argument, which is then invoked inside the outer function in order to complete an aciton or routine.
+
+- What is a promise?
+    * A Promise is an object in JavaScript, which represents the eventual completion (or failure) of asynchronous operation and its resulting value.
 
 ##### Working with APIs
 
